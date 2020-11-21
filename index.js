@@ -20,7 +20,7 @@ app.enable('trust proxy');
 app.use(helmet());
 app.use(morgan('common'));
 app.use(express.json());
-app.use(express.static('./public'));
+app.use(express.static('./src'));
 
 
 const notFoundPath = path.join(__dirname, 'public/404.html');
