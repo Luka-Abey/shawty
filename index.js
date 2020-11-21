@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const yup = require('yup');
 const monk = require('monk');
-// const rateLimit = require('express-rate-limit');
-// const slowDown = require('express-slow-down');
+const rateLimit = require('express-rate-limit');
+const slowDown = require('express-slow-down');
 const { nanoid } = require('nanoid');
 const cors = require('cors')
 const app = express();
@@ -44,14 +44,14 @@ const schema = yup.object().shape({
 });
 
 app.post('/url', 
-// slowDown({
-//   windowMs: 30 * 1000,
-//   delayAfter: 1,
-//   delayMs: 500,
-// }), rateLimit({
-//   windowMs: 30 * 1000,
-//   max: 1,
-// }), 
+slowDown({
+  windowMs: 30 * 1000,
+  delayAfter: 1,
+  delayMs: 500,
+}), rateLimit({
+  windowMs: 30 * 1000,
+  max: 1,
+}), 
 async (req, res, next) => {
   let { slug, url } = req.body;
   try {
@@ -85,6 +85,7 @@ async (req, res, next) => {
 app.use((req, res, next) => {
   res.status(404).sendFile(notFoundPath);
 });
+
 
 app.use((error, req, res, next) => {
   if (error.status) {
