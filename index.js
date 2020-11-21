@@ -3,14 +3,14 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const yup = require('yup');
-const monk = require('monk');
+const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
 const slowDown = require('express-slow-down');
 const { nanoid } = require('nanoid');
 
 require('dotenv').config();
 
-const db = (process.env.MONGODB_URI);
+const db = process.env.MONGODB_URI;
 const urls = db.get('urls');
 urls.createIndex({ slug: 1 }, { unique: true });
 

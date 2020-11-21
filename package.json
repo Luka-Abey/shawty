@@ -1,0 +1,28 @@
+{
+  "name": "urlshort",
+  "version": "1.0.0",
+  "description": "custom url shortener",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luka-Abey/shorty.git"
+  },
+  "author": "Luka Abeywickrama",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Luka-Abey/shorty/issues"
+  },
+  "homepage": "https://github.com/Luka-Abey/shorty",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "mongoose": "^5.10.15",
+    "morgan": "^1.10.0",
+    "nanoid": "^3.1.18",
+    "yup": "^0.30.0"
+  }
+}
