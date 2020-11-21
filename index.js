@@ -23,28 +23,26 @@ app.use(morgan('common'));
 app.use(express.json());
 app.use(express.static('./src'));
 
-//check check
 
+const notFoundPath = path.join(__dirname, 'public/404.html');
 
-// const notFoundPath = path.join(__dirname, 'public/404.html');
+app.get('/:id', async (req, res, next) => {
+  const { id: slug } = req.params;
+  try {
+    const url = await urls.findOne({ slug });
+    if (url) {
+      return res.redirect(url.url);
+    }
+    return res.status(404).sendFile(notFoundPath);
+  } catch (error) {
+    return res.status(404).sendFile(notFoundPath);
+  }
+});
 
-// app.get('/:id', async (req, res, next) => {
-//   const { id: slug } = req.params;
-//   try {
-//     const url = await urls.findOne({ slug });
-//     if (url) {
-//       return res.redirect(url.url);
-//     }
-//     return res.status(404).sendFile(notFoundPath);
-//   } catch (error) {
-//     return res.status(404).sendFile(notFoundPath);
-//   }
-// });
-
-// const schema = yup.object().shape({
-//   slug: yup.string().trim().matches(/^[\w\-]+$/i),
-//   url: yup.string().trim().url().required(),
-// });
+const schema = yup.object().shape({
+  slug: yup.string().trim().matches(/^[\w\-]+$/i),
+  url: yup.string().trim().url().required(),
+});
 
 app.post('/url', 
 // slowDown({
@@ -67,7 +65,7 @@ async (req, res, next) => {
     } else {
       const existing = await urls.findOne({ slug });
       if (existing) {
-        throw new Error('Slug in use. 🍔');
+        throw new Error('Slug already used, please try again');
       }
     }
     slug = slug.toLowerCase();
