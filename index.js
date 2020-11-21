@@ -9,6 +9,7 @@ const slowDown = require('express-slow-down');
 const { nanoid } = require('nanoid');
 const cors = require('cors')
 const app = express();
+
 require('dotenv').config();
 const db = monk(process.env.MONGODB_URI);
 const urls = db.get('urls');
@@ -45,7 +46,7 @@ app.use(express.static('./src'));
 //   url: yup.string().trim().url().required(),
 // });
 
-// app.post('/url', 
+app.post('/url', 
 // slowDown({
 //   windowMs: 30 * 1000,
 //   delayAfter: 1,
@@ -54,35 +55,32 @@ app.use(express.static('./src'));
 //   windowMs: 30 * 1000,
 //   max: 1,
 // }), 
-// async (req, res, next) => {
-//   let { slug, url } = req.body;
-//   try {
-//     await schema.validate({
-//       slug,
-//       url,
-//     });
-//     if (url.includes('cdg.sh')) {
-//       throw new Error('Stop it. 🛑');
-//     }
-//     if (!slug) {
-//       slug = nanoid(5);
-//     } else {
-//       const existing = await urls.findOne({ slug });
-//       if (existing) {
-//         throw new Error('Slug in use. 🍔');
-//       }
-//     }
-//     slug = slug.toLowerCase();
-//     const newUrl = {
-//       url,
-//       slug,
-//     };
-//     const created = await urls.insert(newUrl);
-//     res.json(created);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+async (req, res, next) => {
+  let { slug, url } = req.body;
+  try {
+    await schema.validate({
+      slug,
+      url,
+    });
+    if (!slug) {
+      slug = nanoid(5);
+    } else {
+      const existing = await urls.findOne({ slug });
+      if (existing) {
+        throw new Error('Slug in use. 🍔');
+      }
+    }
+    slug = slug.toLowerCase();
+    const newUrl = {
+      url,
+      slug,
+    };
+    const created = await urls.insert(newUrl);
+    res.json(created);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // app.use((req, res, next) => {
 //   res.status(404).sendFile(notFoundPath);
