@@ -22,6 +22,8 @@ app.use(morgan('common'));
 app.use(express.json());
 app.use(express.static('./src'));
 
+//check check
+
 
 const notFoundPath = path.join(__dirname, 'public/404.html');
 
