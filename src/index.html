@@ -14,13 +14,16 @@
   check check
 
 <main id="app">
-  <form>
+  <form @submit.prevent="createUrl()">
     <label for="url">URL:</label>
     <input v-model="url" name="url">
     <label for="slug">Slug:</label>
     <input v-model="slug" name="slug">
 
   </form>
+  <pre>
+    {{JSON.stringify(created, null, 2)}}
+  </pre>
 </main>
 
 
