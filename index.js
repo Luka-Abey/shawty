@@ -3,29 +3,25 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const yup = require('yup');
-const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
-const slowDown = require('express-slow-down');
+const monk = require('monk');
+// const rateLimit = require('express-rate-limit');
+// const slowDown = require('express-slow-down');
 const { nanoid } = require('nanoid');
-
+const cors = require('cors')
+const app = express();
 require('dotenv').config();
-
-const db = process.env.MONGODB_URI;
+const db = monk(process.env.MONGODB_URI);
 const urls = db.get('urls');
+
 urls.createIndex({ slug: 1 }, { unique: true });
 
-const app = express();
+app.use(cors())
 app.enable('trust proxy');
-
 app.use(helmet());
 app.use(morgan('common'));
 app.use(express.json());
 app.use(express.static('./public'));
 
-mongoose
-  .connect(db, { useNewUrlParser: true })
-  .then(() => console.log('Mongo db connected...'))
-  .catch(err => console.log(err))
 
 const notFoundPath = path.join(__dirname, 'public/404.html');
 
@@ -47,14 +43,16 @@ const schema = yup.object().shape({
   url: yup.string().trim().url().required(),
 });
 
-app.post('/url', slowDown({
-  windowMs: 30 * 1000,
-  delayAfter: 1,
-  delayMs: 500,
-}), rateLimit({
-  windowMs: 30 * 1000,
-  max: 1,
-}), async (req, res, next) => {
+app.post('/url', 
+// slowDown({
+//   windowMs: 30 * 1000,
+//   delayAfter: 1,
+//   delayMs: 500,
+// }), rateLimit({
+//   windowMs: 30 * 1000,
+//   max: 1,
+// }), 
+async (req, res, next) => {
   let { slug, url } = req.body;
   try {
     await schema.validate({
