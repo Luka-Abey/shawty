@@ -1,8 +1,6 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const helmet = require('helmet');
-const csp = require('content-security-policy')
 const yup = require('yup');
 const monk = require('monk');
 const rateLimit = require('express-rate-limit');
@@ -17,21 +15,9 @@ const urls = db.get('urls');
 
 urls.createIndex({ slug: 1 }, { unique: true });
 
-const cspPolicy = {
-  'report-uri': '/reporting',
-  'default-src': csp.SRC_NONE,
-  'script-src': [ csp.SRC_SELF, csp.SRC_DATA ]
-};
- 
-const globalCSP = csp.getCSP(csp.STARTER_OPTIONS);
-const localCSP = csp.getCSP(cspPolicy);
- 
-// This will apply this policy to all requests if no local policy is set
-app.use(globalCSP);
 
 app.use(cors())
 app.enable('trust proxy');
-app.use(helmet());
 app.use(morgan('common'));
 app.use(express.json());
 app.use(express.static('./src'));
