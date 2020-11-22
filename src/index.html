@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-
+  <h2>Shawty's URLs</h2>
   <main id="app">
     <form @submit.prevent="createUrl()">
       <label for="url">URL:</label>
@@ -16,10 +16,13 @@
       <input v-model="slug" name="slug">
       <button type="submit">Create</button>
     </form>
-    <div class="test"></div>
-    <pre>
-      {{JSON.stringify(created, null, 2)}}
-    </pre>
+    <p v-if="created">
+
+      url: https://shwty.uk/{{slug}}
+      slug {{slug}} 
+
+      <br>
+    </p>
   </main>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
   <script src="app.js"></script>

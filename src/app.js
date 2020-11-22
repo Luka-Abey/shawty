@@ -7,7 +7,6 @@ const app = new Vue({
   },
   methods: {
     async createUrl() {
-      console.log(this.url, this.slug)
       const response = await fetch('/url', {
         method: 'POST',
         headers: {
@@ -19,6 +18,7 @@ const app = new Vue({
         })
       });
       this.created = await response.json();
+      console.log(response)
     }
   }
 })
