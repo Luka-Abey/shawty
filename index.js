@@ -16,6 +16,14 @@ const urls = db.get('urls');
 
 urls.createIndex({ slug: 1 }, { unique: true });
 
+app.use(function (req, res, next) {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'"
+  );
+  next();
+});
+
 app.use(cors())
 app.enable('trust proxy');
 app.use(helmet());

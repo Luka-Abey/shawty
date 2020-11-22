@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+
   <title>shawty urls</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -27,8 +29,8 @@
 </main>
 
 
-  <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="app.js"></script>
 </body>
 
 </html>
