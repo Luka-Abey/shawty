@@ -44,14 +44,14 @@ const schema = yup.object().shape({
 });
 
 app.post('/url', 
-// slowDown({
-//   windowMs: 30 * 1000,
-//   delayAfter: 1,
-//   delayMs: 500,
-// }), rateLimit({
-//   windowMs: 30 * 1000,
-//   max: 1,
-// }), 
+slowDown({
+  windowMs: 30 * 1000,
+  delayAfter: 1,
+  delayMs: 500,
+}), rateLimit({
+  windowMs: 30 * 1000,
+  max: 1,
+}), 
 async (req, res, next) => {
   let { slug, url } = req.body;
   try {
