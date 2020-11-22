@@ -3,34 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
-
-  <title>shawty urls</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Document</title>
 </head>
-<header>
-  <h2>shawty urls</h2>
-</header>
-
 <body>
-  check check
-
-<main id="app">
-  <form @submit.prevent="createUrl()">
-    <label for="url">URL:</label>
-    <input v-model="url" name="url">
-    <label for="slug">Slug:</label>
-    <input v-model="slug" name="slug">
-    <button type="submit">Create slugged url</button>
-  </form>
-  <pre>
-    {{JSON.stringify(created, null, 2)}}
-  </pre>
-</main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="app.js"></script>
+  <main id="app">
+    <form @submit.prevent="createUrl()">
+      <label for="url">URL:</label>
+      <input v-model="url" name="url">
+      <label for="slug">Slug:</label>
+      <input v-model="slug" name="slug">
+      <button type="submit">Create</button>
+    </form>
+    <div class="test"></div>
+    <pre>
+      {{JSON.stringify(created, null, 2)}}
+    </pre>
+  </main>
+  <script>
+    const x = 34
+  </script>
 </body>
-
 </html>
