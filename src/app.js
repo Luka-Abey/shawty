@@ -10,7 +10,7 @@ const app = new Vue({
       console.log(this.url, this.slug)
       const response = await fetch('/url', {
         method: 'POST',
-        header: {
+        headers: {
           'content-type': 'application/json'
         },
         body: JSON.stringify({
