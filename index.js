@@ -9,7 +9,10 @@ const { nanoid } = require('nanoid');
 const cors = require('cors')
 const app = express();
 
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const db = monk(process.env.MONGODB_URI);
 const urls = db.get('urls');
 
