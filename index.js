@@ -56,19 +56,15 @@ app.post('/url',
 //   max: 1,
 // }), 
 async (req, res, next) => {
-  console.log('1')
   let { slug, url } = req.body;
   try {
-    console.log('2')
     await schema.validate({
       slug,
       url,
     });
-    console.log('3')
     if (!slug) {
       slug = nanoid(5);
     } else {
-      console.log('4');
       const existing = await urls.findOne({ slug });
       if (existing) {
         throw new Error('Slug already used, please try again');
@@ -79,7 +75,6 @@ async (req, res, next) => {
       url,
       slug,
     };
-    console.log('5');
     const created = await urls.insert(newUrl);
     console.log(created);
     res.json(created);
