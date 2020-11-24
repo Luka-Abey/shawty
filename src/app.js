@@ -18,7 +18,15 @@ const app = new Vue({
         })
       });
       this.created = await response.json();
-      console.log(response)
+      slug = this.created.slug
+      url = this.created.url
+      console.log(this.created); 
+    },
+
+    async copy() {
+      this.$refs.text.select();
+      document.execCommand('copy')
     }
+
   }
 })

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h2>Shawty's URLs</h2>
+  <h2>Shawty URLs</h2>
   <main id="app">
     <form @submit.prevent="createUrl()">
       <label for="url">URL:</label>
@@ -17,9 +17,7 @@
       <button type="submit">Create</button>
     </form>
     <p v-if="created">
-      url: <a href="http://o.shawty.uk/{{slug}}">http://o.shawty.uk/{{slug}}</a>
-      slug {{slug}} 
-      {{error}}
+        url: <a href="https://o.shawty.uk/{{slug}}">https://o.shawty.uk/{{slug}}</a>
       <br>
     </p>
   </main>
