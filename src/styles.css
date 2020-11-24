@@ -11,6 +11,7 @@
   width: 200px;
   padding: 20px;
   text-align: center;
+  min-height: calc(100vh - 50px);
 }
 
 img {
