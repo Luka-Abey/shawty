@@ -3,23 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Shawty URLs</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h2>Shawty URLs</h2>
+  <img src="https://i.imgur.com/C5Ppyok.png?2" title="source: imgur.com" />
   <main id="app">
-    <form @submit.prevent="createUrl()">
-      <label for="url">URL:</label>
-      <input v-model="url" name="url">
-      <label for="slug">Slug:</label>
-      <input v-model="slug" name="slug">
-      <button type="submit">Create</button>
-    </form>
-    <p v-if="created">
-        url: <a href="https://o.shawty.uk/{{slug}}">https://o.shawty.uk/{{slug}}</a>
-      <br>
-    </p>
+    <div class="center">
+      <form @submit.prevent="createUrl()">
+        <div class="align">
+          <label for="url"><img class="icon" src="https://i.imgur.com/E7UB2on.png?1" title="source: imgur.com" /></label>
+          <input v-model="url" name="url">
+        </div>
+        <div class = "align">
+          <label for="slug"><img class="icon" src="https://i.imgur.com/kRfsLwJ.png" title="source: imgur.com" /></label>
+          <input v-model="slug" name="slug">
+        </div>
+      <div class = "align create">       
+        <button type="submit">CREATE</button>
+        <p v-if="created" class = "push-down">
+          <a href="https://o.shawty.uk/{{slug}}">https://o.shawty.uk/{{slug}}</a>
+        <br>
+      </p>
+      </div>
+      </form>
+    </div>
   </main>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
   <script src="app.js"></script>
